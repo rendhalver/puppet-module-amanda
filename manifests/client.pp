@@ -1,7 +1,9 @@
 class amanda::client (
   $remote_user = undef,
   $server      = "backup.$::domain",
-  $xinetd      = true
+  $xinetd      = true,
+  $dumptype    = 'default',
+  $config      = 'daily',
 ) {
   include amanda
   include amanda::params

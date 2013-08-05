@@ -59,4 +59,22 @@ define amanda::config (
     ignore  => ".svn"
   }
 
+  $disklist = "$amanda::params::configs_directory/$config/disklist"
+
+  concat { $disklist:
+        owner   => $amanda::params::user,
+        group   => $amanda::params::group,
+        mode    => 644,
+  }
+
+    concat::fragment { "disklist_header":
+        ensure  => present,
+        target  => $disklist,
+        content => "###\n## Managed by puppet you have been warned\n###\n",
+        order   => 10,
+    }
+
+	Concat::Fragment <<| tag == 'amanda_target_default' |>>
+	Concat::Fragment <<| tag == "amanda_target_${fqdn}" |>>
+
 }
