@@ -35,6 +35,8 @@ class amanda::server (
   } else {
     realize(Package['amanda/server'])
   }
+  # import ssh keys from clients
+  Sshkey <<| tag == 'backup' |>>
 
   # for systems that don't use xinetd, don't use xinetd
   if (("x$xinetd" == 'xtrue') and !$amanda::params::xinetd_unsupported) {
