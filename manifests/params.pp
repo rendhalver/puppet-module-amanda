@@ -24,7 +24,11 @@
 #                  would have been realized, this one is realized
 #                  instead.
 #
-class amanda::params {
+class amanda::params (
+  # set this to true to use the offical packages from zamanda
+  # only setup for Redhat right now.
+  $zamanda_package = false,
+) {
 
   case $::osfamily {
     'Debian':  {
@@ -81,8 +85,8 @@ class amanda::params {
       $comment                = 'Amanda admin'
       $group                  = 'disk'
       $groups                 = [ ]
-      $client_package         = 'amanda-client'
-      $server_package         = 'amanda-server'
+      $client_package         = $zamanda_package ? { false => 'amanda-client', true => 'amanda-backup_client' }
+      $server_package         = $zamanda_package ? { false => 'amanda-server', true => 'amanda-backup_server' }
       $server_provides_client = false
       $amandad_path           = $::architecture ? {
         x86_64 => '/usr/lib64/amanda/amandad',
