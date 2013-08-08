@@ -5,6 +5,7 @@ class amanda::client (
   $dumptype       = 'default',
   $config         = 'daily',
   $server_ssh_key = undef,
+  $backup_dirs    = undef,
   $exclude_dirs   = undef,
 ) {
   include amanda
@@ -14,6 +15,12 @@ class amanda::client (
   if $server_ssh_key != undef {
     amanda::ssh_authorized_key { $fqdn:
       key => $server_ssh_key,
+    }
+  }
+
+  if $exclude_dirs != undef {
+    amanda::target { $backup_dirs,
+      ensure => present,
     }
   }
 
