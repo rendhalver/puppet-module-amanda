@@ -18,7 +18,7 @@ class amanda::client (
     }
   }
 
-  if $exclude_dirs != undef {
+  if $backup_dirs != undef {
     amanda::target { $backup_dirs:
       ensure => present,
     }
