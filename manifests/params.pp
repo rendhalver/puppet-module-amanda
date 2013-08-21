@@ -103,6 +103,7 @@ class amanda::params (
       $amanda_directories     = [
         '/tmp/amanda',
         '/tmp/amanda/amandad',
+        '/var/log/amanda',
       ]
     }
     'FreeBSD': {
