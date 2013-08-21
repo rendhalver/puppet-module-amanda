@@ -87,7 +87,7 @@ class amanda::params (
       $groups                 = [ ]
       $client_package         = $zamanda_package ? { false => 'amanda-client', true => 'amanda-backup_client' }
       $server_package         = $zamanda_package ? { false => 'amanda-server', true => 'amanda-backup_server' }
-      $server_provides_client = false
+      $server_provides_client = $zamanda_package ? { false => false, true => true }
       $amandad_path           = $::architecture ? {
         x86_64 => '/usr/lib64/amanda/amandad',
         i386   => '/usr/lib/amanda/amandad',
