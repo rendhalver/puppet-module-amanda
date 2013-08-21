@@ -24,13 +24,13 @@ class amanda::client (
     }
   }
 
+  file { "${amanda::params::configs_directory}/exclude.list":
+    ensure => file,
+    owner => $amanda::params::user,
+    group => $amanda::params::group,
+    mode => 644,
+  }
   if $exclude_dirs != undef {
-    file { "${amanda::params::configs_directory}/exclude.list":
-      ensure => file,
-      owner => $amanda::params::user,
-      group => $amanda::params::group,
-      mode => 644,
-    }
     amanda::exclude { $exclude_dirs:
       key => present,
     }
