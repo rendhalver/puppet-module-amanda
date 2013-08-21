@@ -104,6 +104,7 @@ class amanda::params (
         '/tmp/amanda',
         '/tmp/amanda/amandad',
         '/var/log/amanda',
+        '/var/amanda',
       ]
     }
     'FreeBSD': {
